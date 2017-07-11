@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>	
+<fieldset>
+	<field
+		name="id"
+		type="hidden"
+	/>
+
+	<field
+		name="interval"
+		type="hidden"
+		default="-1"
+	/>
+	
+	<field
+		name="partOf"
+		type="list"
+		label="COM_VKMACHINE_CRON_PARTOF"
+		description="COM_VKMACHINE_CRON_PARTOF_DESC"
+		size="1"
+		default="1">
+		<option value="2">COM_VKMACHINE_CRON_PARTOF_HOUR</option>
+		<option value="3">COM_VKMACHINE_CRON_PARTOF_DAY</option>
+		<option value="5">COM_VKMACHINE_CRON_PARTOF_WEEK</option>
+	</field>	
+
+	<field 
+		name="interval2" 
+		type="integer" 
+		default="0" 
+		label="COM_VKMACHINE_CRON_INTERVAL" 
+		description="COM_VKMACHINE_CRON_INTERVAL_DESC"  
+		first="1" 
+		last="23" 
+		step="1" 
+	/>
+	
+	<field 
+		name="interval3" 
+		type="integer" 
+		default="1" 
+		label="COM_VKMACHINE_CRON_INTERVAL" 
+		description="COM_VKMACHINE_CRON_INTERVAL_DESC" 
+		first="1" 
+		last="6" 
+		step="1" 
+	/>
+	
+	<field 
+		name="interval5" 
+		type="list" 
+		label="COM_VKMACHINE_CRON_INTERVAL" 
+		description="COM_VKMACHINE_CRON_INTERVAL_DESC"  
+		default="1">
+		<option value="1">COM_VKMACHINE_CRON_INTERVAL_MONDAY</option>
+		<option value="2">COM_VKMACHINE_CRON_INTERVAL_TUESDAY</option>
+		<option value="3">COM_VKMACHINE_CRON_INTERVAL_WEDNESDAY</option>
+		<option value="4">COM_VKMACHINE_CRON_INTERVAL_THURSDAY</option>
+		<option value="5">COM_VKMACHINE_CRON_INTERVAL_FRIDAY</option>
+		<option value="6">COM_VKMACHINE_CRON_INTERVAL_SATURDAY</option>
+		<option value="7">COM_VKMACHINE_CRON_INTERVAL_SUNDAY</option>
+	</field>
+	
+	<field 
+		name="hour" 
+		type="integer" 
+		default="0" 
+		label="COM_VKMACHINE_CRON_HOUR" 
+		description="COM_VKMACHINE_CRON_HOUR_DESC"  
+		first="0" 
+		last="23" 
+		step="1" 
+	/>
+	
+	<field 
+		name="minute" 
+		type="integer" 
+		default="0" 
+		label="COM_VKMACHINE_CRON_MINUTE" 
+		description="COM_VKMACHINE_CRON_MINUTE_DESC"  
+		first="0" 
+		last="59" 
+		step="1" 
+	/>
+
+	<field
+		name="state"
+		type="list"
+		label="COM_VKMACHINE_CRON_STATE"
+		description="COM_VKMACHINE_CRON_STATE_DESC"
+		size="1"
+		default="1">
+		<option value="0">COM_VKMACHINE_CRON_STATE_OFF</option>
+		<option value="1">COM_VKMACHINE_CRON_PARTOF_ON</option>
+	</field>
+</fieldset>
+</form>

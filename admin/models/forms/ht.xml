@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>	
+<fieldset>
+	<field
+		name="id"
+		type="hidden"
+	/>
+		
+	<field
+		name="hashtag"
+		type="text"
+		label="COM_VKMACHINE_HT_HASHTAG"
+		description="COM_VKMACHINE_HT_HASHTAG_DESC"
+		size="40"
+		default=""
+		required="true"
+	/>
+		
+	<field
+		name="menutype"
+		type="menu"
+		label="COM_VKMACHINE_HT_MENU"
+		description="COM_VKMACHINE_HT_MENU_DESC"
+		size="1" />
+	
+	<field
+		name="parent_id"
+		type="menuparent"
+		label="COM_VKMACHINE_HT_MENU_PARENT"
+		description="COM_VKMACHINE_HT_MENU_PARENT_DESC"
+		default="1"
+		filter="int"
+		size="1">
+		<option
+			value="1">COM_VKMACHINE_HT_ITEM_ROOT</option>
+	</field>
+
+	<field
+		name="user_id"
+		type="user"
+		label="COM_VKMACHINE_HT_USER_NAME"
+		description="COM_VKMACHINE_HT_USER_NAME_DESC"
+		required="true"
+  	/>
+	
+	<field
+		name="state"
+		type="list"
+		label="JSTATUS"
+		class="inputbox"
+		size="1"
+		default="1">
+		<option value="1">JPUBLISHED</option>
+		<option value="0">JUNPUBLISHED</option>
+	</field>
+</fieldset>
+</form>

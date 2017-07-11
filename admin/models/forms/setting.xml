@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>	
+<fieldset>
+	<field
+		name="id"
+		type="hidden"
+	/>
+	
+	<field
+		name="page"
+		type="text"
+		label="COM_VKMACHINE_SETTING_PAGE_ID"
+		description="COM_VKMACHINE_SETTING_PAGE_ID_DESC"
+		required="true"
+	/>
+
+	<field
+		name="pageId"
+		type="hidden"
+	/>
+
+	<field
+		name="pageName"
+		type="hidden"
+	/>
+	
+	<field 
+		name="type" 
+		type="list" 
+		label="COM_VKMACHINE_SETTING_TYPE_PAGE" 
+		description="COM_VKMACHINE_SETTING_TYPE_PAGE_DESC"  
+		default="0">
+		<option value="0">COM_VKMACHINE_CRON_TYPE_PAGE_NAN</option>
+		<option value="1">COM_VKMACHINE_CRON_TYPE_PAGE_PERSON</option>
+		<option value="2">COM_VKMACHINE_CRON_TYPE_PAGE_GROUP</option>
+	</field>
+
+	<field
+		name="beginCode"
+		type="text"
+		label="COM_VKMACHINE_SETTING_BEGIN_CODE"
+		description="COM_VKMACHINE_SETTING_BEGIN_CODE_DESC"
+		default=""
+	/>
+
+	<field
+		name="endCode"
+		type="text"
+		label="COM_VKMACHINE_SETTING_END_CODE"
+		description="COM_VKMACHINE_SETTING_END_CODE_DESC"
+		default=""
+	/>
+
+	<field name="lang" type="contentlanguage"
+		label="COM_VKMACHINE_SETTING_LANG"
+		description="COM_VKMACHINE_SETTING_LANG_DESC">
+		<option value="*">JALL</option>
+	</field>
+</fieldset>
+</form>
