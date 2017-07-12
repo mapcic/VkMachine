@@ -111,35 +111,7 @@ class VkmachineModelHome extends VkmachineModelsDefaults {
     public function getInfo() {
         $comParams = JComponentHelper::getParams('com_vkmachine');
         
-        $db = JFactory::getDbo();
-        $query = $db->getQuery(true)
-            ->select('*')
-            ->from($db->quoteName('#__vkmachine_crons'));
-        $db->setQuery($query);
-        $resp = $db->loadObject(); 
-        $id_page = $comParams->get('id_page', '');
-        
-        // General information 
-        $this->info['cronExists'] = ( !empty($resp) )? true : false ;
-        $this->info['cronActive'] = ( !empty($resp) && $resp->state == 1 )? true : false;
-        
-        // Additional information
-        $this->info['cronBehavior'] = '';
-        $this->info['lastLaunch'] = 0;
-        $this->info['nextLaunch'] = 0;
-        if ( $this->info['cronExists'] ) {
-            $timeInterval = ( $resp->partOf != 5 )? ( ( $resp->interval == 1 )? JText::_($this->_convertCronTime[$resp->partOf]['interval']): $resp->interval.' '.JText::_($this->_convertCronTime[$resp->partOf]['interval'].'S') ) : JText::_($this->_convertCronTime[$resp->partOf]['interval'][$resp->interval]) ;
-            $timeHour = ( $resp->partOf == 2 )? '**' : ( (preg_match('/^[0-9]$/', (string)$resp->hour) )? '0'.$resp->hour :  $resp->hour );
-            $timeMinute = ( preg_match('/^[0-9]$/', (string)$resp->minute) )? '0'.$resp->minute : $resp->minute; 
-            
-            $this->info['cronBehavior'] = JText::_('COM_VKMACHINE_HOME_EVERY').' '.$timeInterval.' '.JText::_('COM_VKMACHINE_HOME_AT').' '.$timeHour.':'.$timeMinute;
-            $this->info['lastLaunch'] = $resp->lastLaunch;
-            
-            $interval = ( $resp->partOf == 5 )? 1 : (int)$resp->interval; 
-            $nextLaunch = ( $this->info['lastLaunch'] != '0000-00-00 00:00:00' )? (int) JFactory::getDate($resp->lastLaunch)->format('U') + (int) $this->_convertCronTime[$resp->partOf]['factor']*$interval : (int) $this->_convertCronTime[$resp->partOf]['factor']*$interval;
-            $this->info['nextLaunch'] = ( $nextLaunch > 0 )? JFactory::getDate( $nextLaunch ) : 0;
-        } 
-        
+        $db = JFactory::getDbo();     
         $query = $db->getQuery(true)
             ->select('COUNT('.$db->quoteName('id').')')
             ->from($db->quoteName('#__vkmachine_added'));

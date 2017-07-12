@@ -11,7 +11,6 @@ class VkmachineViewHts extends JViewLegacy {
 		$this->items		= $this->get('Items');
 		$this->pagination	= $this->get('Pagination');
 		$this->info			= $this->get('Info');
-		$this->tmpl			= $this->get('Tmpl');
 		$this->sortColumn 	= $this->state->get('list.ordering');
 		$this->sortDirection = $this->state->get('list.direction');
 

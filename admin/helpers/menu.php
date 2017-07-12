@@ -20,12 +20,6 @@ class VkmachineHelpersMenu {
 			'index.php?option=com_vkmachine',
 			$view == 'home'
 		);
- 
-		JHtmlSidebar::addEntry(
-			JText::_('COM_VKMACHINE_CRONS_SUBMENU'),
-			'index.php?option=com_vkmachine&view=crons',
-			$view == 'crons'
-		);
 
 		JHtmlSidebar::addEntry(
 			JText::_('COM_VKMACHINE_HTS_SUBMENU'),

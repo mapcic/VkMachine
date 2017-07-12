@@ -16,26 +16,8 @@ CREATE TABLE IF NOT EXISTS `#__vkmachine_hts` (
   PRIMARY KEY (`id`)
 );
 
-CREATE TABLE IF NOT EXISTS `#__vkmachine_license` (
+CREATE TABLE IF NOT EXISTS `#__vkmachine` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `license` int(11) DEFAULT 0,
-  `tempLicense` int(11) DEFAULT 0,
-  `template` int(11) DEFAULT 0,
-  `lastLaunch` datetime DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-);
-
-CREATE TABLE IF NOT EXISTS `#__vkmachine_crons` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `partOf` int(11) DEFAULT 1,
-  `interval` int(11) DEFAULT 1,
-  `hour` int(11) DEFAULT 0,
-  `minute` int(11) DEFAULT 0,
-  `state` int(11) DEFAULT 0,
-  `php` varchar(255) DEFAULT '',
-  `time` varchar(255) DEFAULT '',
-  `path` varchar(255) DEFAULT '',
-  `args` varchar(255) DEFAULT 'add.cron',
   `lastLaunch` datetime DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
 );
@@ -45,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `#__vkmachine_settings` (
   `page` varchar(255) NOT NULL, 
   `pageId` varchar(255) DEFAULT '',
   `pageName` varchar(255) DEFAULT '',
+  `skey` varchar(255) DEFAULT '',
   `type` int(11) DEFAULT 0,
   `beginCode` varchar(255) DEFAULT '',
   `endCode` varchar(255) DEFAULT '',

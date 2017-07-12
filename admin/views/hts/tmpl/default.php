@@ -12,7 +12,6 @@
 	
 	<div id="j-main-container" class="span10">	
 	<?php 
-		echo $this->loadTemplate( $this->tmpl );
 		echo $this->loadTemplate('top');
 		echo $this->loadTemplate('hts');
 		echo $this->loadTemplate('hidden');

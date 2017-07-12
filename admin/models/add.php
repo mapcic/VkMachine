@@ -26,6 +26,7 @@ class VkmachineModelAdd extends VkmachineModelsDefault {
 				'endCode', 
 				'beginCode', 
 				'pageId',
+				'skey',
 				'lang'
 				) ) )
 			->from( $db->quoteName('#__vkmachine_settings') )
@@ -97,35 +98,11 @@ class VkmachineModelAdd extends VkmachineModelsDefault {
 	}
 
 	protected function _getSrc( $request ) {
-		if ( !property_exists( $request, 'attachments') ) {
+		if ( !property_exists( $request, 'attachments') && !property_exists( $request->attachments, 'attachments') ) {
 			return array();
 		}
-		$requestTest = $request->attachments;
-		$workArr = array();
-		$arrSizes = array();
 
-		foreach ( $requestTest as $value ) {
-			if ( isset($value->video) ) {
-				$workArr[] = $value->video;
-			} elseif ( isset($value->photo) ) {
-				$workArr[] = $value->photo;
-			}
-		}
-
-		if( empty($workArr) ) {
-			return '';
-		}
-
-		$arrSizes = array_keys(get_object_vars($workArr[0]));
-		foreach ( $arrSizes as $key=>$val ) {
-			if ( !preg_match('/photo_.*/',$val) ) {
-				unset($arrSizes[$key]);
-			}
-		}   
-
-		natsort( $arrSizes );
-
-		return $workArr[0]->{ array_pop($arrSizes) };
+		return $request->attachments[0]->photo->src_big;
 	}
   
   	// @dateNow format is Y-m-d H:i:s
@@ -240,22 +217,31 @@ class VkmachineModelAdd extends VkmachineModelsDefault {
 
 	public function vkNews( $isManual = false ) {
 		$match = array();
-		$hashtagPattern = '/^#(\w+)\s*$/m';
-		$table = ( $isManual )? '#__vkmachine_license' : '#__vkmachine_crons';
-		
-		$request = json_decode(file_get_contents('http://api.vk.com/method/wall.get?v=5.29&owner_id='.$this->_params->pageId.'&count=20'));		
-		$request = ( property_exists($request, 'response') && property_exists($request->response, 'items') )? $request->response->items : array();
+		$hashtagPattern = '/#(\w+)\s*$/';
+		$table = '#__vkmachine';
 
+		$request = json_decode(file_get_contents('https://api.vk.com/api.php?oauth=1&method=wall.get&owner_id='.$this->_params->pageId.'&count=20&access_token='.$this->_params->skey));		
+		
+		$request = ( property_exists($request, 'response') && count($request->response)>1 )? $request->response : array();
+		
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true)->select('*')->from($db->quoteName( $table ))->order($db->quoteName('id').' DESC');
 		$obj = $db->setQuery($query)->loadObject();
-			$obj->lastLaunch = (string)JFactory::getDate('now');
-		
-		$db->updateObject($table, $obj, 'id');
 
+		if (empty($obj)){
+			$obj->id = 1;
+			$obj->lastLaunch = (string)JFactory::getDate('now');
+			$db->insertObject($table, $obj);
+		} else {
+			$obj->lastLaunch = (string)JFactory::getDate('now');
+			$db->updateObject($table, $obj, 'id');
+		}
+		
 		foreach ($request as $req => $val) {
 			if ( property_exists( $val, 'id') && property_exists( $val, 'text') && isset($this->_vkData) && ( !in_array($val->id, $this->_vkData['resultIds']) ) ) {
-				if ( preg_match( $hashtagPattern, $val->text, $match ) && in_array( $match[1], $this->_vkData['resultHashtags'] ) ) {
+				echo 'work!<br>';
+				if ( preg_match( $hashtagPattern, $val->text, $match ) &&  in_array( $match[1], $this->_vkData['resultHashtags'] ) ) {
+					echo 'find';
 					$val->text = preg_replace('/#'.$match[1].'/', '', $val->text);
 					$this->_createArticle($val, $match[1]);
 				}

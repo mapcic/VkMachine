@@ -7,9 +7,9 @@
 		echo $this->loadTemplate('sidebar');
 	?>
 	</div>	
-	<div id="j-main-container" class="span10">	
-	<?php 
-		echo $this->loadTemplate( $this->tmpl );
+	<div id="j-main-container" class="span10">
+	<?php
+		echo $this->loadTemplate('alert');
 		echo $this->loadTemplate('info');
 		echo $this->loadTemplate('added');
 		echo $this->loadTemplate('hidden');

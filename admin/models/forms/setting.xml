@@ -15,6 +15,14 @@
 	/>
 
 	<field
+		name="skey"
+		type="text"
+		label="COM_VKMACHINE_SETTING_SKEY"
+		description="COM_VKMACHINE_SETTING_SKEY_DESC"
+		required="true"
+	/>
+
+	<field
 		name="pageId"
 		type="hidden"
 	/>

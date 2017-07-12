@@ -34,7 +34,7 @@ class VkmachineViewSetting extends JViewLegacy {
 
 	protected function getFormatFieldset() {
 		$groupRegexp = array(
-			'general' => array( 'page' ),
+			'general' => array( 'page', 'skey' ),
 			'common' => array( 'type', 'beginCode', 'endCode', 'lang' ),
 			'hidden' => array( 'id' , 'pageId', 'pageName' )  
 		);

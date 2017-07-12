@@ -15,8 +15,8 @@ if ( !defined( '_JEXEC' ) ){
 
 JLoader::registerPrefix('Vkmachine', JPATH_COMPONENT_ADMINISTRATOR);
 
-VkmachineHelpersLicense::check();
-VkmachineHelpersCron::check();
+// VkmachineHelpersLicense::check();
+// VkmachineHelpersCron::check();
 VkmachineHelpersCron::cron();
 
 $controller = JControllerLegacy::getInstance( 'Vkmachine' );

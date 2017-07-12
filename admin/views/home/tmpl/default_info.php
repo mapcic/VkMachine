@@ -4,13 +4,45 @@
 	<h4><?php echo( JText::_('COM_VKMACHINE_HOME_INFO_GENERAL').':' ); ?></h4>
 	<div class="thumbnail row-fluid alert-success">
 		<div class="clearfix"> </div>
-		<div class="span12"><?php echo( JText::_('COM_VKMACHINE_HOME_INFO_VERSION').': '.$this->info['version'] ); ?></div>
-		<div class="span12"><?php echo( JText::_('COM_VKMACHINE_HOME_INFO_LICENSE').': '.(( $this->info['license'] == 0 )? JText::_('COM_VKMACHINE_HOME_INFO_LICENSE_NO') : JFactory::getDate( $this->info['license'] )) ); ?></div>
-		<div class="span12"><?php echo( JText::_('COM_VKMACHINE_HOME_INFO_STATUS').': '.$this->info['status'] ); ?></div>
-		<div class="span12"><?php echo( JText::_('COM_VKMACHINE_HOME_INFO_CRON_EXISTS').': '.(( $this->info['cronExists'] )? JText::_('COM_VKMACHINE_HOME_INFO_CRON_EXISTS_YES') : '<a href="'.JRoute::_('index.php?option=com_vkmachine&task=cron.add').'">'.JText::_('COM_VKMACHINE_HOME_INFO_CRON_EXISTS_ADD').'</a>') ); ?></div>
-		<div class="span12"><?php echo( JText::_('COM_VKMACHINE_HOME_INFO_CRON_ACTIVE').': '.(( $this->info['cronExists'] && $this->info['cronActive'])? JText::_('COM_VKMACHINE_HOME_INFO_CRON_ACTIVE_YES') : JText::_('COM_VKMACHINE_HOME_INFO_CRON_ACTIVE_NO') ) ); ?></div>
-		<div class="span12"><?php echo( JText::_('COM_VKMACHINE_HOME_INFO_PAGE_ID').': '.(( empty( $this->info['pageId'] ) )? JText::_('COM_VKMACHINE_HOME_INFO_PAGE_ID_EMPTY') : $this->info['pageId'].'('.$this->info['pageName'].')') ); ?></div>
-		<div class="span12"><?php echo( JText::_('COM_VKMACHINE_HOME_INFO_CURRENT_TIME').': '.(string)JFactory::getDate('now') ); ?></div>
+
+		<div class="span12"><?php
+			echo( JText::_('COM_VKMACHINE_HOME_INFO_VERSION').': '.$this->info['version'] );
+		?></div>
+
+		<div class="span12"><?php 
+			if (empty( $this->info['pageId'] )) {
+				$text = '<a href="'.JRoute::_('index.php?option=com_vkmachine&task=setting.edit').'">'.JText::_('COM_VKMACHINE_HOME_INFO_PAGE_ID_EMPTY').'</a>';
+			} else {
+				$text = $this->info['pageId'].'('.$this->info['pageName'].')';
+			}
+
+			echo(JText::_('COM_VKMACHINE_HOME_INFO_PAGE_ID').': '.$text);
+		?></div>
+
+		<div class="span12"><?php 
+			if (empty( $this->info['skey'] )) {
+				$text = '<a href="'.JRoute::_('index.php?option=com_vkmachine&task=setting.edit').'">'.JText::_('COM_VKMACHINE_HOME_SKEY_EMPTY').'</a>';
+			} else {
+				$text = $this->info['skey'];
+			}
+
+			echo(JText::_('COM_VKMACHINE_HOME_SKEY').': '.$text);
+		?></div>
+
+		<div class="span12"><?php
+			if ($this->info['numHts'] == 0) {
+				$text = '<a href="'.JRoute::_('index.php?option=com_vkmachine&task=ht.add').'">'.JText::_('COM_VKMACHINE_HOME_HT_0').'</a>';
+			} else {
+				$text = $this->info['numHts'];
+			}
+
+			echo( JText::_('COM_VKMACHINE_HOME_INFO_NUM_HTS').': '.$text);
+		?></div>
+
+		<div class="span12"><?php 
+			echo( JText::_('COM_VKMACHINE_HOME_INFO_AUTOLAUNCH').': '.JText::_('COM_VKMACHINE_HOME_INFO_AUTOLAUNCH_INTRODUC') );
+		?></div>
+
 	</div>
 </div>
 
@@ -18,13 +50,37 @@
 	<h4><?php echo( JText::_('COM_VKMACHINE_HOME_INFO_ADDITIONAL').':' ); ?></h4>
 	<div class="thumbnail row-fluid alert-info">
 		<div class="clearfix"> </div>
-		<div class="span12"><?php echo( JText::_('COM_VKMACHINE_HOME_INFO_CRON_BEHAVIOR').': '.( empty($this->info['cronBehavior'])? JText::_('COM_VKMACHINE_HOME_INFO_CRON_BEHAVIOR_NO') : $this->info['cronBehavior']) ); ?></div>
-		<div class="span12"><?php echo( JText::_('COM_VKMACHINE_HOME_INFO_LAST_LAUNCH').': '.(( $this->info['lastManualLaunch'] == 0 )? JText::_('COM_VKMACHINE_HOME_INFO_LAST_LAUNCH_NO') : $this->info['lastManualLaunch'] ) ); ?></div>
-		<div class="span12"><?php echo( JText::_('COM_VKMACHINE_HOME_INFO_CRON_LAST_LAUNCH').': '.(( $this->info['lastLaunch'] == 0 )? JText::_('COM_VKMACHINE_HOME_INFO_LAST_LAUNCH_NO') : $this->info['lastLaunch'] ) ); ?></div>
-		<div class="span12"><?php echo( JText::_('COM_VKMACHINE_HOME_INFO_CRON_NEXT_LAUNCH').': '.(( $this->info['lastLaunch'] == 0 || !$this->info['cronActive'] ) ? JText::_('COM_VKMACHINE_HOME_INFO_NEXT_LAUNCH_NO') : $this->info['nextLaunch'] ) ); ?></div>
-		<div class="span12"><?php echo( JText::_('COM_VKMACHINE_HOME_INFO_LAST_ADD').': '.(( $this->info['lastAdd'] == 0 )? JText::_('COM_VKMACHINE_HOME_INFO_LAST_ADD_NO') : $this->info['lastAdd'] ) ); ?></div>
-		<div class="span12"><?php echo( JText::_('COM_VKMACHINE_HOME_INFO_NUM_ADDED').': '.$this->info['numAdded']); ?></div>
-		<div class="span12"><?php echo( JText::_('COM_VKMACHINE_HOME_INFO_NUM_HTS').': '.$this->info['numHts']); ?></div>
+
+		<div class="span12"><?php
+			$text = (string)JFactory::getDate('now');
+			echo( JText::_('COM_VKMACHINE_HOME_INFO_CURRENT_TIME').': '.$text );
+		?></div>
+
+		<div class="span12"><?php
+			if ($this->info['lastLaunch'] == 0 ) {
+				$text = JText::_('COM_VKMACHINE_HOME_INFO_LAST_LAUNCH_NO');
+			} else {
+				$text = $this->info['lastLaunch'];
+			}
+
+			echo( JText::_('COM_VKMACHINE_HOME_INFO_LAST_LAUNCH').': '.$text);
+		?></div>
+
+		<div class="span12"><?php
+			if ($this->info['lastAdd'] == 0 ) {
+				$text = JText::_('COM_VKMACHINE_HOME_INFO_LAST_ADD_NO');
+			} else {
+				$text = $this->info['lastAdd'];
+			}
+
+			echo( JText::_('COM_VKMACHINE_HOME_INFO_LAST_ADD').': '.$text);
+		?></div>
+
+		<div class="span12"><?php
+			$text = $this->info['numAdded'];
+			echo( JText::_('COM_VKMACHINE_HOME_INFO_NUM_ADDED').': '.$text);
+		?></div>
+
 	</div>
 </div>
 <div class="clearfix"> </div>
