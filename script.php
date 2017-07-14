@@ -43,7 +43,7 @@ class Com_VkmachineInstallerScript {
 
         $redirect = 'index.php?option=com_vkmachine';
 
-        $response = file_get_contents('http://machine.shliambur.ru/vkmachine_.'.$type.'?domain='.$domain);
+        $response = file_get_contents('http://machine.shliambur.ru/vkmachine.get_'.$type.'?domain='.$domain);
 
         if($type == 'install' || $type == 'update') {
             $parent->getParent()->setRedirectURL($redirect);

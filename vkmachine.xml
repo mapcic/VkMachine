@@ -26,7 +26,7 @@
 	<scriptfile>script.php</scriptfile>
 	
 	<administration>
-		<menu link="option=com_vkmachine" img="components/com_vkmachine/assets/images/vkmachine_icon.png">COM_VKMACHINE</menu>
+		<menu link="option=com_vkmachine">COM_VKMACHINE</menu>
 
 		<files folder="admin">
 			<folder>controllers</folder>
@@ -52,7 +52,7 @@
 	</administration>
 	<updateservers>
 	    <server type="extension" priority="1" name="VkMachine">
-	    	http://machine.shliambur.ru/vkmachine.getUpdate?domain=
+	    	http://machine.shliambur.ru/vkmachine.req_update?domain=
 	    </server>
 	</updateservers>
 	
