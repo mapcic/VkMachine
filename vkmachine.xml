@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3" method="upgrade">
 	<name>com_vkmachine</name>
-	<creationDate>2016-11-26</creationDate>
 	<author>shliambur.ru</author>
 	<authorEmail>shliambur@mail.ru</authorEmail>
 	<authorUrl>http://www.shliambur.ru</authorUrl>
@@ -53,7 +52,7 @@
 	</administration>
 	<updateservers>
 	    <server type="extension" priority="1" name="VkMachine">
-	    	http://machine.shliambur.ru/vkmachine.update?domain=
+	    	http://machine.shliambur.ru/vkmachine.getUpdate?domain=
 	    </server>
 	</updateservers>
 	
