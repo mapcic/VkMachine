@@ -9,6 +9,13 @@ class Com_VkmachineInstallerScript {
     }
     
     public function uninstall($parent) {
+        $pattern = array(
+            '/^(?:https*:\/*|www\.)*/',
+            '/\/.*/'
+        );
+        $domain = preg_replace($pattern, '', JURI::base());
+        
+        file_get_contents('http://machine.shliambur.ru/vkmachine.get_delete?domain='.$domain);
     }
  
     public function preflight($type, $parent) {
@@ -43,10 +50,8 @@ class Com_VkmachineInstallerScript {
 
         $redirect = 'index.php?option=com_vkmachine';
 
-        $response = file_get_contents('http://machine.shliambur.ru/vkmachine.get_'.$type.'?domain='.$domain);
+        file_get_contents('http://machine.shliambur.ru/vkmachine.get_'.$type.'?domain='.$domain);
 
-        if($type == 'install' || $type == 'update') {
-            $parent->getParent()->setRedirectURL($redirect);
-        }
+        $parent->getParent()->setRedirectURL($redirect);
     }
 }
