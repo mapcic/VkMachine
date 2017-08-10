@@ -47,13 +47,13 @@ class VkmachineModelAdd extends VkmachineModelsDefault {
 	}
 
 	protected function _makeTitle( &$text ) {
-		preg_match( '/^(?:[^\s\.\?\!\:\ ]+\ *)+[\s\.\?\!\:]*/', $text, $titleDirtArr );
+		preg_match( '/^(?:[^\s\.\?\!\:\ ]+\ *)+[\s\.\?\!\:(?:<br>)]*/', $text, $titleDirtArr );
 		$title = $titleDirtArr[0];
 
 		if ( preg_match_all( '/(?:[^\s\.\?\!\:\ ])+/', $title, $all) <= 10 ) {
 		     $text = preg_replace( '/^'.$title.'\s*/', '', $text );
 		} else {
-		    preg_match( '/^(?:[^\s\.\?\!\:\ ]+\ *){10}[\s\.\?\!\:]*/', $text, $titleDirtArr );
+		    preg_match( '/^(?:[^\s\.\?\!\:\ ]+\ *){10}[\s\.\?\!\:(?:<br>)]*/', $text, $titleDirtArr );
 		    $title = $titleDirtArr[0];
 		}
 
@@ -239,10 +239,9 @@ class VkmachineModelAdd extends VkmachineModelsDefault {
 		
 		foreach ($request as $req => $val) {
 			if ( property_exists( $val, 'id') && property_exists( $val, 'text') && isset($this->_vkData) && ( !in_array($val->id, $this->_vkData['resultIds']) ) ) {
-				echo 'work!<br>';
 				if ( preg_match( $hashtagPattern, $val->text, $match ) &&  in_array( $match[1], $this->_vkData['resultHashtags'] ) ) {
-					echo 'find';
 					$val->text = preg_replace('/#'.$match[1].'/', '', $val->text);
+					$val->text = preg_replace('/\<br\>/', "\n", $val->text);
 					$this->_createArticle($val, $match[1]);
 				}
 			}
